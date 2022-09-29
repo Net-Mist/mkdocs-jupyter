@@ -21,7 +21,7 @@ def test_can_render_notebook(filename):
     mkdocs_dir = os.path.join(this_dir, "mkdocs")
 
     run = subprocess.run(
-        ["mkdocs", "build", "-q", "-f", f"{filename}"], cwd=mkdocs_dir
+        ["python", "-m", "mkdocs", "build", "-q", "-f", f"{filename}"], cwd=mkdocs_dir
     )
     assert run.returncode == 0
 
@@ -29,6 +29,6 @@ def test_can_render_notebook(filename):
 def test_fails_when_configured_to_fail():
     this_dir = os.path.dirname(os.path.realpath(__file__))
     mkdocs_dir = os.path.join(this_dir, "mkdocs")
-    cmd = ["mkdocs", "build", "-q", "-f", "base-with-nbs-failure.yml"]
+    cmd = ["python", "-m", "mkdocs", "build", "-q", "-f", "base-with-nbs-failure.yml"]
     result = subprocess.run(cmd, cwd=mkdocs_dir)
     assert result.returncode != 0
